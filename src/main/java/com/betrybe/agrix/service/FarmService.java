@@ -23,6 +23,7 @@ public class FarmService {
    * Instantiates a new Farm service.
    *
    * @param farmRepository the farm repository
+   * @param cropRepository the crop repository
    */
   @Autowired
   public FarmService(FarmRepository farmRepository, CropRepository cropRepository) {
@@ -75,6 +76,13 @@ public class FarmService {
     return cropRepository.save(crop);
   }
 
+  /**
+   * Gets crops by id.
+   *
+   * @param farmId the farm id
+   * @return the crops by id
+   * @throws FarmNotFoundException the farm not found exception
+   */
   public List<Crop> getCropsById(Long farmId) throws FarmNotFoundException {
     Farm farm = getFarmById(farmId);
     return farm.getCrops();
