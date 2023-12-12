@@ -15,4 +15,8 @@ public record FarmDto(Long id, String name, double size) {
   public Farm toFarm() {
     return new Farm(id, name, size);
   }
+
+  public static FarmDto fromFarm(Farm farm) {
+    return new FarmDto(farm.getId(), farm.getName(), farm.getSize());
+  }
 }
