@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * The interface Crop repository.
  */
 @Repository
-public interface CropRepository extends JpaRepository<Crop, Integer> {
+public interface CropRepository extends JpaRepository<Crop, Long> {
 
 }

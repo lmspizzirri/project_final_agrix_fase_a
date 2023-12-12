@@ -83,7 +83,7 @@ public class FarmService {
    * @return the crops by id
    * @throws FarmNotFoundException the farm not found exception
    */
-  public List<Crop> getCropsById(Long farmId) throws FarmNotFoundException {
+  public List<Crop> getCropsByFarmId(Long farmId) throws FarmNotFoundException {
     Farm farm = getFarmById(farmId);
     return farm.getCrops();
   }
