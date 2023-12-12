@@ -16,6 +16,12 @@ public record FarmDto(Long id, String name, double size) {
     return new Farm(id, name, size);
   }
 
+  /**
+   * From farm farm dto.
+   *
+   * @param farm the farm
+   * @return the farm dto
+   */
   public static FarmDto fromFarm(Farm farm) {
     return new FarmDto(farm.getId(), farm.getName(), farm.getSize());
   }
