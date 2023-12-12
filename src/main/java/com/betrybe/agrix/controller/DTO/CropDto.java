@@ -25,7 +25,7 @@ public record CropDto(Long id, String name, Double plantedArea, Long farmId) {
    * @param crop the crop
    * @return the crop dto
    */
-  public CropDto fromCrop(Crop crop) {
+  public static CropDto fromCrop(Crop crop) {
     return new CropDto(crop.getId(), crop.getName(), crop.getPlantedArea(), crop.getFarm().getId());
   }
 

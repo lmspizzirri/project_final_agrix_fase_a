@@ -1,6 +1,8 @@
 package com.betrybe.agrix.service;
 
+import com.betrybe.agrix.model.entities.Crop;
 import com.betrybe.agrix.model.entities.Farm;
+import com.betrybe.agrix.model.repositories.CropRepository;
 import com.betrybe.agrix.model.repositories.FarmRepository;
 import com.betrybe.agrix.service.exceptions.FarmNotFoundException;
 import java.util.List;
@@ -13,16 +15,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class FarmService {
 
-  @Autowired
-  private FarmRepository farmRepository;
+
+  private final FarmRepository farmRepository;
+  private final CropRepository cropRepository;
 
   /**
    * Instantiates a new Farm service.
    *
    * @param farmRepository the farm repository
    */
-  public FarmService(FarmRepository farmRepository) {
+  @Autowired
+  public FarmService(FarmRepository farmRepository, CropRepository cropRepository) {
     this.farmRepository = farmRepository;
+    this.cropRepository = cropRepository;
   }
 
   /**
@@ -54,6 +59,20 @@ public class FarmService {
   public Farm getFarmById(Long id) throws FarmNotFoundException {
     return farmRepository.findById(id)
         .orElseThrow(() -> new FarmNotFoundException("Fazenda não encontrada!"));
+  }
+
+  /**
+   * Add crop crop.
+   *
+   * @param crop   the crop
+   * @param farmId the farm id
+   * @return the crop
+   * @throws FarmNotFoundException the farm not found exception
+   */
+  public Crop addCrop(Crop crop, Long farmId) throws FarmNotFoundException {
+    Farm farm = getFarmById(farmId);
+    crop.setFarm(farm);
+    return cropRepository.save(crop);
   }
 
 }

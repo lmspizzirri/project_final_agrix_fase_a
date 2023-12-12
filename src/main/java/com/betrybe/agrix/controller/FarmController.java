@@ -1,6 +1,8 @@
 package com.betrybe.agrix.controller;
 
+import com.betrybe.agrix.controller.dto.CropDto;
 import com.betrybe.agrix.controller.dto.FarmDto;
+import com.betrybe.agrix.model.entities.Crop;
 import com.betrybe.agrix.model.entities.Farm;
 import com.betrybe.agrix.service.FarmService;
 import com.betrybe.agrix.service.exceptions.FarmNotFoundException;
@@ -72,6 +74,23 @@ public class FarmController {
     try {
       Farm farm = farmService.getFarmById(id);
       return ResponseEntity.ok(FarmDto.fromFarm(farm));
+    } catch (FarmNotFoundException exception) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+  }
+
+  /**
+   * Add crop response entity.
+   *
+   * @param crop the crop
+   * @param id   the id
+   * @return the response entity
+   */
+  @PostMapping("/{id}/crops")
+  public ResponseEntity<?> addCrop(@RequestBody CropDto crop, @PathVariable Long id) {
+    try {
+      Crop savedCrop = farmService.addCrop(crop.toCrop(), id);
+      return ResponseEntity.status(HttpStatus.CREATED).body(CropDto.fromCrop(savedCrop));
     } catch (FarmNotFoundException exception) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
