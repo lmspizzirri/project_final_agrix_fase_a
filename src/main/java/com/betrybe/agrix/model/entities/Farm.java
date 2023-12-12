@@ -4,11 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.util.List;
 
 /**
  * The type Farm model.
  */
 @Entity
+@Table(name = "farms")
 public class Farm {
 
   @Id
@@ -17,6 +21,8 @@ public class Farm {
   private String name;
   private double size;
 
+  @OneToMany(mappedBy = "farm")
+  private List<Crop> crops;
 
   /**
    * Instantiates a new Farm model.

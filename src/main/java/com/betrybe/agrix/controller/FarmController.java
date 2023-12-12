@@ -67,7 +67,7 @@ public class FarmController {
    * @param id the id
    * @return the farm by id
    */
-  @GetMapping
+  @GetMapping("/{id}")
   public ResponseEntity<?> getFarmById(@PathVariable Long id) {
     try {
       Farm farm = farmService.getFarmById(id);
