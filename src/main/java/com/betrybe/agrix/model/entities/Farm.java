@@ -89,6 +89,24 @@ public class Farm {
   }
 
   /**
+   * Gets crops.
+   *
+   * @return the crops
+   */
+  public List<Crop> getCrops() {
+    return crops;
+  }
+
+  /**
+   * Sets crops.
+   *
+   * @param crops the crops
+   */
+  public void setCrops(List<Crop> crops) {
+    this.crops = crops;
+  }
+
+  /**
    * Sets size.
    *
    * @param size the size

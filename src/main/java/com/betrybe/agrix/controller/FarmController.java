@@ -95,4 +95,15 @@ public class FarmController {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
   }
+
+  @GetMapping("/{id}/crops")
+  public ResponseEntity<?> getCropsById(@PathVariable Long id) {
+    try {
+      List<Crop> cropsInFarm = farmService.getCropsById(id);
+      List<CropDto> cropDtos = cropsInFarm.stream().map(CropDto::fromCrop).collect(Collectors.toList());
+      return ResponseEntity.ok(cropDtos);
+    } catch (FarmNotFoundException exception) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+  }
 }
